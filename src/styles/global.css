@@ -1,0 +1,108 @@
+:root {
+  --primary: rgb(0, 32, 178);
+  --secondary: #415fe7;
+  --secondary-light: #849aff;
+  --white: rgb(255, 255, 255);
+  --black: rgb(51, 51, 51);
+  --black-light: #777777;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  color: var(--black);
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+/* Color */
+
+.primary {
+  color: var(--primary);
+}
+
+.secondary {
+  color: var(--secondary);
+}
+
+.secondary-light {
+  color: var(--secondary-light);
+}
+
+.white {
+  color: var(--white);
+}
+
+.black {
+  color: var(--black);
+}
+
+.black-light {
+  color: var(--black-light);
+}
+
+/* Background Color */
+
+.bg-primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-secondary-light {
+  background-color: var(--secondary-light);
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+
+.bg-black {
+  background-color: var(--black);
+}
+
+.bg-black-light {
+  background-color: var(--black-light);
+}
+
+/* Border Outline */
+
+.border-secondary {
+  border: 1px solid var(--secondary);
+}
+
+.border-dark {
+  border: 1px solid rgba(51, 51, 51, 0.1);
+}
+
+/* Fill Icon */
+.fill-primary {
+  fill: var(--primary);
+}
+
+/* Stroke Icon */
+.stroke-white {
+  stroke: var(--white);
+  stroke-width: 1px;
+}
+
+.stroke-primary {
+  stroke: var(--primary);
+  stroke-width: 1px;
+}
+
+.stroke-secondary {
+  stroke: var(--secondary);
+  stroke-width: 1px;
+}
