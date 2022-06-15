@@ -5,6 +5,7 @@ import {
   CardGroup,
   CardItem,
   CardItemGroup,
+  FooterLink,
   HeroWrapper,
   LayoutLanding,
   LogoWrapper,
@@ -23,11 +24,19 @@ import {
   BsCashCoin,
   BsBox,
   BsSearch,
+  BsCart,
+  BsFacebook,
+  BsInstagram,
+  BsTwitter,
 } from "react-icons/bs";
 import hero from "../../assets/png/landing01.png";
 import heroBlur from "../../assets/svg/landing01-blur.svg";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import item01 from "../../assets/png/item01.png";
+import subs from "../../assets/png/landing02.png";
+import subsBlur from "../../assets/svg/landing02-blur.svg";
+import bgFooter from "../../assets/svg/bg-footer.svg";
 
 const LandingPage = () => {
   useEffect(() => {
@@ -36,7 +45,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <LayoutLanding>
+    <LayoutLanding bgFooter={bgFooter}>
       <section className="first">
         <NavBarLanding>
           <LogoWrapper>
@@ -89,7 +98,7 @@ const LandingPage = () => {
           </div>
           <div className="right">
             <div className="img-wrapper" data-aos="fade-up">
-              <img src={hero} alt="" height={430} />
+              <img src={hero} alt="" height={"430vw"} />
               <img src={heroBlur} alt="" className="blur" />
             </div>
 
@@ -187,18 +196,162 @@ const LandingPage = () => {
           </NavItem>
 
           <CardItemGroup>
-            <CardItem>card</CardItem>
-            <CardItem>card</CardItem>
-            <CardItem>card</CardItem>
-            <CardItem>card</CardItem>
-            <CardItem>card</CardItem>
-            <CardItem>card</CardItem>
+            <CardItem>
+              <div className="layer-cart bg-secondary">
+                <BsCart className="stroke-white" />
+              </div>
+              <div className="layer-top">
+                <div className="item">Sennheiser HD-25</div>
+                <div className="price primary">$3000</div>
+              </div>
+              <div className="layer-img">
+                <img src={item01} alt="" />
+              </div>
+            </CardItem>
+            <CardItem>
+              <div className="layer-cart bg-secondary">
+                <BsCart className="stroke-white" />
+              </div>
+              <div className="layer-top">
+                <div className="item">Sennheiser HD-25</div>
+                <div className="price primary">$3000</div>
+              </div>
+              <div className="layer-img">
+                <img src={item01} alt="" />
+              </div>
+            </CardItem>
+            <CardItem>
+              <div className="layer-cart bg-secondary">
+                <BsCart className="stroke-white" />
+              </div>
+              <div className="layer-top">
+                <div className="item">Sennheiser HD-25</div>
+                <div className="price primary">$3000</div>
+              </div>
+              <div className="layer-img">
+                <img src={item01} alt="" />
+              </div>
+            </CardItem>
+            <CardItem>
+              <div className="layer-cart bg-secondary">
+                <BsCart className="stroke-white" />
+              </div>
+              <div className="layer-top">
+                <div className="item">Sennheiser HD-25</div>
+                <div className="price primary">$3000</div>
+              </div>
+              <div className="layer-img">
+                <img src={item01} alt="" />
+              </div>
+            </CardItem>
+            <CardItem>
+              <div className="layer-cart bg-secondary">
+                <BsCart className="stroke-white" />
+              </div>
+              <div className="layer-top">
+                <div className="item">Sennheiser HD-25</div>
+                <div className="price primary">$3000</div>
+              </div>
+              <div className="layer-img">
+                <img src={item01} alt="" />
+              </div>
+            </CardItem>
+            <CardItem>
+              <div className="layer-cart bg-secondary">
+                <BsCart className="stroke-white" />
+              </div>
+              <div className="layer-top">
+                <div className="item">Sennheiser HD-25</div>
+                <div className="price primary">$3000</div>
+              </div>
+              <div className="layer-img">
+                <img src={item01} alt="" />
+              </div>
+            </CardItem>
           </CardItemGroup>
+
+          <div className="info">
+            <button className="btn-view-all bg-primary">View All</button>
+          </div>
         </div>
       </SectionWrapper>
-      <section>subscribe</section>
-      <footer>footer</footer>
-      <div>LandingPage</div>
+
+      <SectionWrapper className="second">
+        <div className="subs-wrapper">
+          <div className="left" data-aos="fade-up">
+            <img src={subs} alt="" width={"450vw"} className="subs" />
+            <img src={subsBlur} alt="" className="subs-blur" />
+          </div>
+          <div className="right">
+            <h1>Get 30% Off of Your First Purchases</h1>
+            <p className="black-light">
+              Enter your Email Below To Receive The Discount Code
+            </p>
+            <div className="subs-input border-primary">
+              <input
+                type={"email"}
+                placeholder="Enter Your Email"
+                className="primary"
+              />
+              <button className="btn-view-all bg-primary" type="button">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      <SectionWrapper className="footer">
+        <div className="footer-wrapper">
+          <div className="footer-left">
+            <img src={logo} alt="" />
+            <div className="location">
+              91 Spring Dr.
+              <br />
+              Hudsonville, MI 49426
+            </div>
+            <div className="social-media">
+              <a href={"https://web.facebook.com/"} target="__blank">
+                <BsFacebook />
+              </a>
+              <a href={"https://www.instagram.com/"} target="__blank">
+                <BsInstagram />
+              </a>
+              <a href={"https://twitter.com/home"} target="__blank">
+                <BsTwitter />
+              </a>
+            </div>
+          </div>
+          <div className="footer-right">
+            <div className="footer-nav">
+              <div className="title">How it Works</div>
+              <div className="item">
+                <FooterLink to="/lectronic-shop">Select Product</FooterLink>
+                <FooterLink to="/lectronic-shop">Make Payment</FooterLink>
+                <FooterLink to="/lectronic-shop">Receive Product</FooterLink>
+              </div>
+            </div>
+            <div className="footer-nav">
+              <div className="title">Product</div>
+              <div className="item">
+                <FooterLink to="/lectronic-shop">Headphone</FooterLink>
+                <FooterLink to="/lectronic-shop">Air Conditioner</FooterLink>
+                <FooterLink to="/lectronic-shop">Router</FooterLink>
+                <FooterLink to="/lectronic-shop">Television</FooterLink>
+              </div>
+            </div>
+            <div className="footer-nav">
+              <div className="title">Help</div>
+              <div className="item">
+                <FooterLink to="/lectronic-shop">About</FooterLink>
+                <FooterLink to="/lectronic-shop">Contact Us</FooterLink>
+                <FooterLink to="/lectronic-shop">Download App</FooterLink>
+                <FooterLink to="/lectronic-shop">FAQs</FooterLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
     </LayoutLanding>
   );
 };
