@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { ArrowBack, LayoutWrapper } from "../../styles/layouts/auth.styles";
+import { LayoutWrapper } from "../../styles/layouts/auth.styles";
 import logo from "../../assets/svg/logo-app.svg";
 import heroLogin from "../../assets/png/hero-login.png";
 import heroRegister from "../../assets/png/hero-register.png";
-import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import FormLogin from "../../components/moleculs/FormLogin.comp";
 import Input from "../../components/atomics/Input.comp";
 import { BsPerson, BsKey } from "react-icons/bs";
 import Button from "../../components/atomics/Button.comp";
+import ButtonArrowBack from "../../components/atomics/ButtonArrowBack.comp";
 
 const LayoutAuth = (props) => {
   const { login } = props;
@@ -105,9 +105,7 @@ const LayoutAuth = (props) => {
   return (
     <LayoutWrapper heroAuth={propsAuth.heroImage}>
       <div className="layout-left">
-        <ArrowBack to="/lectronic-shop">
-          <IoIosArrowBack className="stroke-primary" />
-        </ArrowBack>
+        <ButtonArrowBack to="/lectronic-shop" />
         <div className="form-auth">
           <FormLogin title={propsForm.title} desc={propsForm.desc}>
             {propsForm.component}

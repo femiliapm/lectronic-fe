@@ -18,6 +18,10 @@
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 button,
 input {
   border: none;
@@ -123,4 +127,36 @@ h1 {
 .stroke-secondary {
   stroke: var(--secondary);
   stroke-width: 1px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  list-style: none;
+  cursor: pointer;
+  background: #ffffff;
+  box-shadow: 0px 0px 60px rgba(45, 45, 45, 0.1);
+  padding: 22px;
+  border-radius: 20px;
+}
+
+.pagination a {
+  border-radius: 100%;
+  padding: 0.5vw 1vw;
+  color: #777777;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+.pagination__link--active a {
+  color: #fff;
+  background: #0300ad;
+}
+
+.pagination__link--disabled a {
+  color: rgb(198, 197, 202);
 }

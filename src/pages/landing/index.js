@@ -32,7 +32,6 @@ import {
 import hero from "../../assets/png/landing01.png";
 import heroBlur from "../../assets/svg/landing01-blur.svg";
 import AOS from "aos";
-import "aos/dist/aos.css";
 import item01 from "../../assets/png/item01.png";
 import subs from "../../assets/png/landing02.png";
 import subsBlur from "../../assets/svg/landing02-blur.svg";
