@@ -23,6 +23,12 @@ export const MainContent = styled.main`
   margin: 8vw 8vw 0;
   position: relative;
 
+  .cart-hero {
+    font-size: 4vw;
+    font-weight: 800;
+    margin-bottom: 2.5vw;
+  }
+
   .card-group {
     display: flex;
     justify-content: space-between;
