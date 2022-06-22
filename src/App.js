@@ -8,6 +8,7 @@ import CartPage from "./pages/cart";
 import DetailItemPage from "./pages/detailItem";
 import CheckoutPage from "./pages/checkout";
 import TransactionStatusPage from "./pages/transactionStatus";
+import HistoryPage from "./pages/history";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/detail/1" element={<DetailItemPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/status" element={<TransactionStatusPage />} />
+      <Route path="/history" element={<HistoryPage />} />
     </Routes>
   );
 }

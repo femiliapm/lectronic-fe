@@ -17,6 +17,7 @@ export const ButtonIconWrapper = styled.button`
   margin: ${(props) => (props.small ? `0` : `0 10px`)};
   background-color: white;
   border: ${(props) => props.small && `1px solid #0020B2`};
+  border: ${(props) => props.small && props.black && `1px solid #333333`};
 `;
 
 export const MainContent = styled.main`
