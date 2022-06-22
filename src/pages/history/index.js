@@ -8,11 +8,12 @@ import {
   MainHistory,
   SearchHistory,
 } from "../../styles/history";
-import { ButtonIconWrapper } from "../../styles/items";
+import { ButtonIconWrapper, PaginationWrapper } from "../../styles/items";
 import item from "../../assets/png/item01.png";
 import { LabelItem } from "../../styles/cart";
 import NumberFormat from "react-number-format";
 import Button from "../../components/atomics/Button.comp";
+import ReactPaginate from "react-paginate";
 
 const HistoryPage = () => {
   return (
@@ -162,6 +163,17 @@ const HistoryPage = () => {
             </div>
           </CardHistory>
         </div>
+        <PaginationWrapper history>
+          <ReactPaginate
+            nextLabel="|  >"
+            previousLabel="<  |"
+            pageCount={10}
+            marginPagesDisplayed={10}
+            containerClassName="pagination"
+            activeClassName="pagination__link--active"
+            disabledClassName="pagination__link--disabled"
+          />
+        </PaginationWrapper>
       </MainHistory>
     </LayoutHome>
   );

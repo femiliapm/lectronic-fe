@@ -9,7 +9,8 @@ export const SearchHistory = styled.div`
 
 export const MainHistory = styled.div`
   padding: 0 8vw;
-  margin: 3vw 0;
+  margin: 3vw 0 4vw;
+  position: relative;
 
   h1 {
     font-weight: 800;

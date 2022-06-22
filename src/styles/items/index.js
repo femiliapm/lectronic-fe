@@ -117,5 +117,6 @@ export const PaginationWrapper = styled.div`
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: -10vw;
+  bottom: -${(props) => (props.history ? `6vw` : `10vw`)};
+  left: 0;
 `;
