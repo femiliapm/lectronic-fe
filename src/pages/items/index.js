@@ -55,7 +55,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -78,7 +78,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -101,7 +101,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -124,7 +124,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -147,7 +147,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -170,7 +170,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -193,7 +193,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -216,7 +216,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -239,7 +239,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -262,7 +262,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -285,7 +285,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
@@ -308,7 +308,7 @@ const ItemsPage = () => {
             </div>
 
             <div className="layer-btn-group">
-              <Button text="Detail" />
+              <Button width="fit-content" text="Detail" />
               <ButtonIconWrapper small>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
