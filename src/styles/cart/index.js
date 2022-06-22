@@ -141,8 +141,8 @@ export const InputCheckbox = styled.input`
         position: absolute;
         ${(props) =>
           props.small
-            ? `top: 0.16vw; left: 0.33vw; height: 8px; width: 4px;`
-            : `top: 0.3vw; left: 8px; height: 10px; width: 5px;`}
+            ? `top: 0.26vw; left: 0.53vw; height: 8px; width: 4px;`
+            : `top: 0.3vw; left: 10px; height: 10px; width: 5px;`}
         content: "";
       }
     }

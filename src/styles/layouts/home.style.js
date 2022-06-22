@@ -9,8 +9,13 @@ export const HeaderItems = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 37px 48px 10vw;
-  background-image: url(${bgHeader});
+  ${(props) =>
+    props.v2
+      ? `padding: 37px 48px 3vw;`
+      : `
+    padding: 37px 48px 10vw;
+    background-image: url(${bgHeader});
+`}
 `;
 
 export const FooterItems = styled.footer`

@@ -5,6 +5,7 @@ import LandingPage from "./pages/landing";
 import LayoutAuth from "./layouts/auth";
 import ItemsPage from "./pages/items";
 import CartPage from "./pages/cart";
+import DetailItemPage from "./pages/detailItem";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/register" element={<LayoutAuth />} />
       <Route path="/lectronic-shop/explore" element={<ItemsPage />} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="/detail/1" element={<DetailItemPage />} />
     </Routes>
   );
 }

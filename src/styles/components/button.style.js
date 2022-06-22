@@ -6,6 +6,7 @@ export const ButtonStyled = styled.button`
   font-weight: 700;
   font-size: 16px;
   cursor: pointer;
+  width: 100%;
 
   &:hover,
   &:active {
