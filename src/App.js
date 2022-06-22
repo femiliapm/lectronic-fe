@@ -6,6 +6,7 @@ import LayoutAuth from "./layouts/auth";
 import ItemsPage from "./pages/items";
 import CartPage from "./pages/cart";
 import DetailItemPage from "./pages/detailItem";
+import CheckoutPage from "./pages/checkout";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/lectronic-shop/explore" element={<ItemsPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/detail/1" element={<DetailItemPage />} />
+      <Route path="/checkout" element={<CheckoutPage />} />
     </Routes>
   );
 }
