@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ButtonLanding,
   Card,
@@ -16,7 +16,7 @@ import {
   SectionWrapper,
 } from "../../styles/landing";
 import logo from "../../assets/svg/logo-app.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   BsBag,
   BsBriefcase,
@@ -36,12 +36,30 @@ import item01 from "../../assets/png/item01.png";
 import subs from "../../assets/png/landing02.png";
 import subsBlur from "../../assets/svg/landing02-blur.svg";
 import bgFooter from "../../assets/svg/bg-footer.svg";
+import { getLandingPageAPI } from "../../services/landing.service";
+import NumberFormat from "react-number-format";
 
 const LandingPage = () => {
+  const [data, setData] = useState([]);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();
+    getLandingPageData();
   }, []);
+
+  const getLandingPageData = async () => {
+    const res = await getLandingPageAPI();
+    console.log(res);
+    setData(res.data);
+  };
+
+  const handleViewAll = (e) => {
+    e.preventDefault();
+    navigate("/login");
+  };
 
   return (
     <LayoutLanding bgFooter={bgFooter}>
@@ -52,7 +70,7 @@ const LandingPage = () => {
             <p className="primary">Lectronic</p>
           </LogoWrapper>
           <MenuWrapper>
-            <ButtonLanding to="/lectronic-shop">
+            <ButtonLanding to="/register">
               <div className="bg-primary sign-up">Sign Up</div>
             </ButtonLanding>
             <MenuItemWrapper>
@@ -81,13 +99,13 @@ const LandingPage = () => {
               amet sint. Velit officia consequat duis enim velit mollit..
             </div>
             <div className="cta-landing">
-              <ButtonLanding to="/lectronic-shop">
+              <ButtonLanding to="/login">
                 <div className="bg-primary shop-now">
                   <BsBag className="stroke-white" />
                   Shop Now
                 </div>
               </ButtonLanding>
-              <ButtonLanding to="/lectronic-shop">
+              <ButtonLanding to="/register">
                 <div className="secondary seller border-secondary">
                   <BsBriefcase className="stroke-secondary" />
                   Be a Seller
@@ -195,82 +213,42 @@ const LandingPage = () => {
           </NavItem>
 
           <CardItemGroup>
-            <CardItem>
-              <div className="layer-cart bg-secondary">
-                <BsCart className="stroke-white" />
-              </div>
-              <div className="layer-top">
-                <div className="item">Sennheiser HD-25</div>
-                <div className="price primary">$3000</div>
-              </div>
-              <div className="layer-img">
-                <img src={item01} alt="" />
-              </div>
-            </CardItem>
-            <CardItem>
-              <div className="layer-cart bg-secondary">
-                <BsCart className="stroke-white" />
-              </div>
-              <div className="layer-top">
-                <div className="item">Sennheiser HD-25</div>
-                <div className="price primary">$3000</div>
-              </div>
-              <div className="layer-img">
-                <img src={item01} alt="" />
-              </div>
-            </CardItem>
-            <CardItem>
-              <div className="layer-cart bg-secondary">
-                <BsCart className="stroke-white" />
-              </div>
-              <div className="layer-top">
-                <div className="item">Sennheiser HD-25</div>
-                <div className="price primary">$3000</div>
-              </div>
-              <div className="layer-img">
-                <img src={item01} alt="" />
-              </div>
-            </CardItem>
-            <CardItem>
-              <div className="layer-cart bg-secondary">
-                <BsCart className="stroke-white" />
-              </div>
-              <div className="layer-top">
-                <div className="item">Sennheiser HD-25</div>
-                <div className="price primary">$3000</div>
-              </div>
-              <div className="layer-img">
-                <img src={item01} alt="" />
-              </div>
-            </CardItem>
-            <CardItem>
-              <div className="layer-cart bg-secondary">
-                <BsCart className="stroke-white" />
-              </div>
-              <div className="layer-top">
-                <div className="item">Sennheiser HD-25</div>
-                <div className="price primary">$3000</div>
-              </div>
-              <div className="layer-img">
-                <img src={item01} alt="" />
-              </div>
-            </CardItem>
-            <CardItem>
-              <div className="layer-cart bg-secondary">
-                <BsCart className="stroke-white" />
-              </div>
-              <div className="layer-top">
-                <div className="item">Sennheiser HD-25</div>
-                <div className="price primary">$3000</div>
-              </div>
-              <div className="layer-img">
-                <img src={item01} alt="" />
-              </div>
-            </CardItem>
+            {data && data.length > 0 ? (
+              data.map((e) => {
+                console.log(e);
+                return (
+                  <CardItem key={e.productId}>
+                    <div className="layer-cart bg-secondary">
+                      <BsCart className="stroke-white" />
+                    </div>
+                    <div className="layer-top">
+                      <div className="item">{e.productName}</div>
+                      <div className="price">
+                        <NumberFormat
+                          value={e.productPrice}
+                          displayType={"text"}
+                          prefix={"Rp "}
+                          className="primary"
+                          thousandSeparator="."
+                          decimalSeparator=","
+                        />
+                      </div>
+                    </div>
+                    <div className="layer-img">
+                      <img src={item01} alt="" />
+                    </div>
+                  </CardItem>
+                );
+              })
+            ) : (
+              <p>No data</p>
+            )}
           </CardItemGroup>
 
           <div className="info">
-            <button className="btn-view-all bg-primary">View All</button>
+            <button className="btn-view-all bg-primary" onClick={handleViewAll}>
+              View All
+            </button>
           </div>
         </div>
       </SectionWrapper>

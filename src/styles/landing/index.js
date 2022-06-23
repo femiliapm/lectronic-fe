@@ -401,7 +401,7 @@ export const CardItem = styled.div`
   margin: 0 25px 70px;
   box-shadow: 0px 0px 60px rgba(45, 45, 45, 0.1);
   border-radius: 20px;
-  padding: 380px 30px 30px;
+  padding: 410px 30px 30px;
   position: relative;
 
   .layer-cart {
@@ -434,7 +434,8 @@ export const CardItem = styled.div`
 
   .layer-img {
     position: absolute;
-    top: 100px;
+    top: 0;
+    margin: 9vw 0 0;
     left: 0;
     display: flex;
     justify-content: center;
