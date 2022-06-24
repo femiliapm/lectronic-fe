@@ -15,11 +15,12 @@ import item01 from "../../assets/png/item01.png";
 import ReactPaginate from "react-paginate";
 import { getLandingPageAPI } from "../../services/landing.service";
 import NumberFormat from "react-number-format";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { getExistingUserId } from "../../configs/api";
+import { addToCartAPI } from "../../services/order.service";
 
 const ItemsPage = () => {
   const [data, setData] = useState([]);
-  const navigate = useNavigate();
 
   const getProducts = async () => {
     const res = await getLandingPageAPI();
@@ -30,9 +31,19 @@ const ItemsPage = () => {
     getProducts();
   }, []);
 
-  const handleDetail = (productId, e) => {
+  const handleOrder = async (e, productId, quantity, price, discount) => {
     e.preventDefault();
-    navigate(`/detail/${productId}`);
+    const userId = getExistingUserId();
+    const data = {
+      productId,
+      userId,
+      quantity,
+      price,
+      discount,
+    };
+    console.log(data);
+    const res = await addToCartAPI(data);
+    console.log(res);
   };
 
   return (
@@ -40,9 +51,11 @@ const ItemsPage = () => {
       <SearchGroup>
         <InputSearch className="left" />
         <div>
-          <ButtonIconWrapper>
-            <BsCart2 size={20} />
-          </ButtonIconWrapper>
+          <Link to={"/cart"}>
+            <ButtonIconWrapper>
+              <BsCart2 size={20} />
+            </ButtonIconWrapper>
+          </Link>
           <ButtonIconWrapper>
             <BsFunnel size={20} />
           </ButtonIconWrapper>
@@ -88,12 +101,15 @@ const ItemsPage = () => {
                   </div>
 
                   <div className="layer-btn-group">
-                    <Button
-                      width="fit-content"
-                      text="Detail"
-                      onClick={(event) => handleDetail(e.productId, event)}
-                    />
-                    <ButtonIconWrapper small>
+                    <Link to={`/detail/${e.productId}`}>
+                      <Button width="fit-content" text="Detail" />
+                    </Link>
+                    <ButtonIconWrapper
+                      small
+                      onClick={(event) =>
+                        handleOrder(event, e.productId, 1, e.productPrice, 0)
+                      }
+                    >
                       <BsCart2 size={20} className="stroke-primary" />
                     </ButtonIconWrapper>
                   </div>

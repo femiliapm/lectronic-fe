@@ -218,9 +218,11 @@ const LandingPage = () => {
                 console.log(e);
                 return (
                   <CardItem key={e.productId}>
-                    <div className="layer-cart bg-secondary">
-                      <BsCart className="stroke-white" />
-                    </div>
+                    <Link to={"/login"}>
+                      <div className="layer-cart bg-secondary">
+                        <BsCart className="stroke-white" />
+                      </div>
+                    </Link>
                     <div className="layer-top">
                       <div className="item">{e.productName}</div>
                       <div className="price">

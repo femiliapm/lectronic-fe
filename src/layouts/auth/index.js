@@ -38,6 +38,7 @@ const LayoutAuth = (props) => {
       if (res.status === 200) {
         navigate("/lectronic-shop/explore");
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
         alert(res.message);
       }
     },
