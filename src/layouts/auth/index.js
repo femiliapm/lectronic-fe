@@ -3,15 +3,18 @@ import { LayoutWrapper } from "../../styles/layouts/auth.styles";
 import logo from "../../assets/svg/logo-app.svg";
 import heroLogin from "../../assets/png/hero-login.png";
 import heroRegister from "../../assets/png/hero-register.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormLogin from "../../components/moleculs/FormLogin.comp";
 import Input from "../../components/atomics/Input.comp";
 import { BsPerson, BsKey } from "react-icons/bs";
 import Button from "../../components/atomics/Button.comp";
 import ButtonArrowBack from "../../components/atomics/ButtonArrowBack.comp";
+import { loginAPI, registerAPI } from "../../services/auth.service";
 
 const LayoutAuth = (props) => {
   const { login } = props;
+  const navigate = useNavigate();
+
   const [propsForm, setPropsForm] = useState({
     title: "",
     desc: "",
@@ -22,6 +25,38 @@ const LayoutAuth = (props) => {
     heroImage: "",
     component: null,
   });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+
+  const handleLogin = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const data = { email, password };
+      const res = await loginAPI(data);
+      console.log(res);
+      if (res.status === 200) {
+        navigate("/lectronic-shop/explore");
+        localStorage.setItem("token", res.data.token);
+        alert(res.message);
+      }
+    },
+    [email, password, navigate]
+  );
+
+  const handleRegister = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const data = { fullName, email, password };
+      const res = await registerAPI(data);
+      console.log(res);
+      if (res.status === 201) {
+        navigate("/login");
+        alert(res.message);
+      }
+    },
+    [email, fullName, navigate, password]
+  );
 
   const formAuth = useCallback(() => {
     if (login) {
@@ -34,17 +69,19 @@ const LayoutAuth = (props) => {
               icon={<BsPerson />}
               type="email"
               placeholder="Your e-mail address"
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               icon={<BsKey />}
               type="password"
               placeholder="Your password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className="login-group-btn">
               <Link to={"/auth"} className="black-light">
                 Forgot Password?
               </Link>
-              <Button text="Login" />
+              <Button text="Login" width="fit-content" onClick={handleLogin} />
             </div>
           </form>
         ),
@@ -72,19 +109,26 @@ const LayoutAuth = (props) => {
               icon={<BsPerson />}
               type="text"
               placeholder="What's your name?"
+              onChange={(e) => setFullName(e.target.value)}
             />
             <Input
               icon={<BsPerson />}
               type="email"
               placeholder="Your e-mail address"
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               icon={<BsKey />}
               type="password"
               placeholder="Your password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className="register-group-btn">
-              <Button text="Register" />
+              <Button
+                text="Register"
+                width="fit-content"
+                onClick={handleRegister}
+              />
             </div>
           </form>
         ),
@@ -96,7 +140,7 @@ const LayoutAuth = (props) => {
         component: <div className="create-link"></div>,
       });
     }
-  }, [login]);
+  }, [handleLogin, handleRegister, login]);
 
   useEffect(() => {
     formAuth();
