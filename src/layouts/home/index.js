@@ -13,7 +13,7 @@ const LayoutHome = (props) => {
   return (
     <LayoutHomeWrapper>
       <HeaderItems>
-        <ButtonArrowBack to="/" />
+        <ButtonArrowBack to="/lectronic-shop" />
         <img src={logo} alt="logo" width={"40vw"} />
       </HeaderItems>
       {children}

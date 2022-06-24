@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import LayoutHome2 from "../../layouts/home/home-v2.layout";
 import {
   InputIncrementWrapper,
@@ -19,15 +19,34 @@ import NumberFormat from "react-number-format";
 import Button from "../../components/atomics/Button.comp";
 import { ButtonIconWrapper } from "../../styles/items";
 import seller from "../../assets/png/seller.png";
+import { useParams } from "react-router-dom";
+import { getProductByIdAPI } from "../../services/product.service";
 
 const DetailItemPage = () => {
+  const { productId } = useParams();
+  const [product, setProduct] = useState({});
+  const [store, setStore] = useState({});
+  const [photos, setPhotos] = useState([]);
+
+  const getProductById = useCallback(async () => {
+    const res = await getProductByIdAPI(productId);
+    console.log(res);
+    setProduct(res.data.product);
+    setStore(res.data.product.seller);
+    setPhotos(res.data.photos);
+  }, [productId]);
+
+  useEffect(() => {
+    getProductById();
+  }, [getProductById]);
+
   return (
     <LayoutHome2>
       <MainDetails>
         <div className="left">
           <CardDetailImage>
             <div className="layer-top">
-              <LabelItem>Headphone</LabelItem>
+              <LabelItem>{product.category}</LabelItem>
             </div>
 
             <div className="layer-img">
@@ -59,7 +78,7 @@ const DetailItemPage = () => {
                 <button className="primary">+</button>
               </InputIncrementWrapper>
               <div className="stock black-light">
-                Stok <span>5</span>
+                Stok <span>{product.stock}</span>
               </div>
             </div>
             <div className="third-row">
@@ -74,9 +93,11 @@ const DetailItemPage = () => {
               <p className="black-light">Sub-Total</p>
               <div>
                 <NumberFormat
-                  value={3000}
+                  value={product.price}
                   displayType={"text"}
-                  prefix={"$"}
+                  prefix={"Rp "}
+                  thousandSeparator="."
+                  decimalSeparator=","
                   className="sub-total"
                 />
               </div>
@@ -94,7 +115,7 @@ const DetailItemPage = () => {
 
         <div className="right">
           <ContentItem>
-            <h1>Sony MDR-5607</h1>
+            <h1>{product.name}</h1>
             <div className="sold">
               <p className="black-light">
                 Sold <span className="primary">6</span> |
@@ -109,31 +130,7 @@ const DetailItemPage = () => {
               <TabContent>Info</TabContent>
             </div>
             <div className="content-paragraph">
-              <p>
-                Open repair of infrarenal aortic aneurysm or dissection, plus
-                repair of associated arterial trauma, following unsuccessful
-                endovascular repair; tube prosthesis{" "}
-              </p>
-              <p>
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat sunt nostrud amet. Amet minim
-                mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                Velit officia consequat duis enim velit mollit. Exercitation
-                veniam consequat sunt nostrud amet. Amet minim mollit non
-                deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                officia consequat duis enim velit mollit. Exercitation veniam
-                consequat sunt nostrud amet. Amet minim mollit non deserunt
-                ullamco est sit aliqua dolor do amet sint. Velit officia
-                consequat duis enim velit mollit. Exercitation veniam consequat
-                sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-                sit aliqua dolor do amet sint. Velit officia consequat duis enim
-                velit mollit. Exercitation veniam consequat sunt nostrud amet.
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat sunt nostrud amet. Amet minim
-                mollit non deserunt ullamco est sit aliqua dolor{" "}
-              </p>
+              <p>{product.description}</p>
             </div>
           </ContentItem>
 
@@ -142,7 +139,7 @@ const DetailItemPage = () => {
               <img src={seller} alt="seller" width={150} />
             </div>
             <div className="second-column">
-              <h3>GeekFun</h3>
+              <h3>{store.name}</h3>
               <p className="primary">Online</p>
               <div className="testimoni">
                 <p className="black-light">
