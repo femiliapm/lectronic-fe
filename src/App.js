@@ -18,7 +18,7 @@ function App() {
       <Route path="/register" element={<LayoutAuth />} />
       <Route path="/lectronic-shop/explore" element={<ItemsPage />} />
       <Route path="/cart" element={<CartPage />} />
-      <Route path="/detail/1" element={<DetailItemPage />} />
+      <Route path="/detail/:productId" element={<DetailItemPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/status" element={<TransactionStatusPage />} />
       <Route path="/history" element={<HistoryPage />} />
