@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsBagCheck, BsPerson, BsTrash } from "react-icons/bs";
 import NumberFormat from "react-number-format";
 import Button from "../../components/atomics/Button.comp";
@@ -20,19 +20,64 @@ import {
   SearchGroup,
 } from "../../styles/items";
 import item from "../../assets/png/item01.png";
+import { Link, useNavigate } from "react-router-dom";
+import { getCartListAPI } from "../../services/order.service";
 
 const CartPage = () => {
+  const [dataCart, setDataCart] = useState([]);
+  const [priceSelected, setPriceSelected] = useState(0);
+  const [data, setData] = useState([]);
+
+  const navigate = useNavigate();
+
+  const getCartList = async () => {
+    const res = await getCartListAPI();
+    console.log(res);
+    setDataCart(res.data);
+  };
+
+  useEffect(() => {
+    getCartList();
+  }, []);
+
+  const handleChecked = (e, orderId) => {
+    const checked = e.target.checked;
+    console.log(checked);
+    if (checked) {
+      let temp = Number(priceSelected);
+      let value = Number(e.target.value);
+      let total = Number(temp + value);
+      setPriceSelected(total);
+      setData([...data, { orderId, price: value, discount: 0 }]);
+    } else {
+      let temp = Number(priceSelected);
+      let value = Number(e.target.value);
+      let total = Number(temp - value);
+      setPriceSelected(total);
+      setData(data.filter((item) => item.orderId !== orderId));
+    }
+  };
+
+  const handleCheckout = (e) => {
+    console.log(priceSelected);
+    console.log(data, "data");
+    e.preventDefault();
+    navigate("/checkout", { state: data });
+  };
+
   return (
-    <LayoutHome>
+    <LayoutHome to="/lectronic-shop/explore">
       <SearchGroup>
         <InputSearch />
         <div>
           <ButtonIconWrapper>
             <BsPerson size={20} />
           </ButtonIconWrapper>
-          <ButtonIconWrapper>
-            <BsBagCheck size={20} />
-          </ButtonIconWrapper>
+          <Link to={"/history"}>
+            <ButtonIconWrapper>
+              <BsBagCheck size={20} />
+            </ButtonIconWrapper>
+          </Link>
         </div>
       </SearchGroup>
 
@@ -45,126 +90,57 @@ const CartPage = () => {
 
         <MainCart>
           <div className="left">
-            <CardCartItem>
-              <div className="detail">
-                <InputCheckbox type={"checkbox"} small />
-                <img src={item} alt="item" width={"50vw"} />
-                <div className="detail-item">
-                  <p className="item-name">Sony MDR-5706</p>
-                  <div className="label">
-                    <LabelItem>Headphone</LabelItem>
-                  </div>
-                  <div>
-                    <NumberFormat
-                      value={3000}
-                      displayType={"text"}
-                      prefix={"$"}
-                      className="primary item-price"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="item-action">
-                <div className="center">
-                  <BsTrash />
-                  <InputIncrementWrapper className="border-primary">
-                    <button className="primary">-</button>
-                    <InputNumber type={"number"} max={4} min={1} value={1} />
-                    <button className="primary">+</button>
-                  </InputIncrementWrapper>
-                </div>
-              </div>
-            </CardCartItem>
-            <CardCartItem>
-              <div className="detail">
-                <InputCheckbox type={"checkbox"} small />
-                <img src={item} alt="item" width={"50vw"} />
-                <div className="detail-item">
-                  <p className="item-name">Sony MDR-5706</p>
-                  <div className="label">
-                    <LabelItem>Headphone</LabelItem>
-                  </div>
-                  <div>
-                    <NumberFormat
-                      value={3000}
-                      displayType={"text"}
-                      prefix={"$"}
-                      className="primary item-price"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="item-action">
-                <div className="center">
-                  <BsTrash />
-                  <InputIncrementWrapper className="border-primary">
-                    <button className="primary">-</button>
-                    <InputNumber type={"number"} max={4} min={1} value={1} />
-                    <button className="primary">+</button>
-                  </InputIncrementWrapper>
-                </div>
-              </div>
-            </CardCartItem>
-            <CardCartItem>
-              <div className="detail">
-                <InputCheckbox type={"checkbox"} small />
-                <img src={item} alt="item" width={"50vw"} />
-                <div className="detail-item">
-                  <p className="item-name">Sony MDR-5706</p>
-                  <div className="label">
-                    <LabelItem>Headphone</LabelItem>
-                  </div>
-                  <div>
-                    <NumberFormat
-                      value={3000}
-                      displayType={"text"}
-                      prefix={"$"}
-                      className="primary item-price"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="item-action">
-                <div className="center">
-                  <BsTrash />
-                  <InputIncrementWrapper className="border-primary">
-                    <button className="primary">-</button>
-                    <InputNumber type={"number"} max={4} min={1} value={1} />
-                    <button className="primary">+</button>
-                  </InputIncrementWrapper>
-                </div>
-              </div>
-            </CardCartItem>
-            <CardCartItem>
-              <div className="detail">
-                <InputCheckbox type={"checkbox"} small />
-                <img src={item} alt="item" width={"50vw"} />
-                <div className="detail-item">
-                  <p className="item-name">Sony MDR-5706</p>
-                  <div className="label">
-                    <LabelItem>Headphone</LabelItem>
-                  </div>
-                  <div>
-                    <NumberFormat
-                      value={3000}
-                      displayType={"text"}
-                      prefix={"$"}
-                      className="primary item-price"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="item-action">
-                <div className="center">
-                  <BsTrash />
-                  <InputIncrementWrapper className="border-primary">
-                    <button className="primary">-</button>
-                    <InputNumber type={"number"} max={4} min={1} value={1} />
-                    <button className="primary">+</button>
-                  </InputIncrementWrapper>
-                </div>
-              </div>
-            </CardCartItem>
+            {dataCart && dataCart.length > 0 ? (
+              dataCart.map((el) => {
+                console.log(el);
+                return (
+                  <CardCartItem key={el.id}>
+                    <div className="detail">
+                      <InputCheckbox
+                        type={"checkbox"}
+                        small
+                        onChange={(e) => handleChecked(e, el.id)}
+                        value={el.price}
+                      />
+                      <img src={item} alt="item" width={"50vw"} />
+                      <div className="detail-item">
+                        <p className="item-name">{el.product.name}</p>
+                        <div className="label">
+                          <LabelItem>{el.product.category}</LabelItem>
+                        </div>
+                        <div>
+                          <NumberFormat
+                            value={el.price}
+                            displayType={"text"}
+                            prefix={"Rp "}
+                            thousandSeparator="."
+                            decimalSeparator=","
+                            className="primary item-price"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="item-action">
+                      <div className="center">
+                        <BsTrash />
+                        <InputIncrementWrapper className="border-primary">
+                          <button className="primary">-</button>
+                          <InputNumber
+                            type={"number"}
+                            max={4}
+                            min={1}
+                            value={el.quantity}
+                          />
+                          <button className="primary">+</button>
+                        </InputIncrementWrapper>
+                      </div>
+                    </div>
+                  </CardCartItem>
+                );
+              })
+            ) : (
+              <p>No data</p>
+            )}
           </div>
 
           <div className="right">
@@ -175,9 +151,11 @@ const CartPage = () => {
                   <td className="name">Item Price</td>
                   <td>
                     <NumberFormat
-                      value={0}
+                      value={priceSelected}
                       displayType={"text"}
-                      prefix={"$"}
+                      prefix={"Rp "}
+                      thousandSeparator="."
+                      decimalSeparator=","
                       className="value black-light"
                     />
                   </td>
@@ -186,9 +164,11 @@ const CartPage = () => {
                   <td className="name discount">Discount</td>
                   <td className="discount">
                     <NumberFormat
-                      value={6000}
+                      value={0}
                       displayType={"text"}
-                      prefix={"$"}
+                      prefix={"Rp "}
+                      thousandSeparator="."
+                      decimalSeparator=","
                       className="value black-light"
                     />
                   </td>
@@ -197,9 +177,11 @@ const CartPage = () => {
                   <td className="name bill">Bill</td>
                   <td>
                     <NumberFormat
-                      value={6000}
+                      value={priceSelected}
                       displayType={"text"}
-                      prefix={"$"}
+                      prefix={"Rp "}
+                      thousandSeparator="."
+                      decimalSeparator=","
                       className="bill-value"
                     />
                   </td>
@@ -207,7 +189,7 @@ const CartPage = () => {
               </tbody>
             </table>
             <div className="btn-checkout">
-              <Button text="Check Out" />
+              <Button text="Check Out" onClick={handleCheckout} />
             </div>
           </div>
         </MainCart>

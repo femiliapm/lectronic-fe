@@ -44,6 +44,7 @@ const ItemsPage = () => {
     console.log(data);
     const res = await addToCartAPI(data);
     console.log(res);
+    alert(res.message);
   };
 
   return (
