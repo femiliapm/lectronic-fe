@@ -14,11 +14,12 @@ import {
 import { CardAddress, MainCheckout } from "../../styles/checkout";
 import item from "../../assets/png/item01.png";
 import { BsTrash } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { addTransactionAPI } from "../../services/checkout.service";
 
 const CheckoutPage = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
   const [address, setAddress] = useState("");
@@ -45,8 +46,10 @@ const CheckoutPage = () => {
 
   const handleTransaction = async (e) => {
     e.preventDefault();
+    let dataArr = [];
     for (let index = 0; index < state.length; index++) {
-      const element = state[index];
+      const element = await state[index];
+      console.log(element);
       const { id } = element.order;
       const data = {
         orderId: id,
@@ -54,13 +57,25 @@ const CheckoutPage = () => {
         totalPrice,
         totalDiscount,
       };
-      const res = await addTransactionAPI(data);
-      console.log(res);
+      dataArr[index] = data;
+    }
+    console.log(dataArr);
+    const res = await addTransactionAPI(dataArr);
+    console.log(res);
+    if (res.status === 201) {
+      alert(res.message);
+      navigate(".", { state: [] });
+      setAddress("");
+      setTimeout(() => {
+        navigate("/status");
+      }, 3000);
+    } else {
+      alert(res[0]);
     }
   };
 
   return (
-    <LayoutHome>
+    <LayoutHome to="/cart">
       <MainCheckout>
         <h1>Checkout</h1>
 
@@ -77,7 +92,7 @@ const CheckoutPage = () => {
                 <Button text="Change Address" width="fit-content" outline />
               </div>
             </CardAddress>
-            {state ? (
+            {state && state.length > 0 ? (
               state.map((el) => {
                 const { product, price, quantity, id } = el.order;
                 return (
