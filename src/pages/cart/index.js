@@ -40,7 +40,7 @@ const CartPage = () => {
     getCartList();
   }, []);
 
-  const handleChecked = (e, orderId) => {
+  const handleChecked = (e, order) => {
     const checked = e.target.checked;
     console.log(checked);
     if (checked) {
@@ -48,13 +48,13 @@ const CartPage = () => {
       let value = Number(e.target.value);
       let total = Number(temp + value);
       setPriceSelected(total);
-      setData([...data, { orderId, price: value, discount: 0 }]);
+      setData([...data, { order }]);
     } else {
       let temp = Number(priceSelected);
       let value = Number(e.target.value);
       let total = Number(temp - value);
       setPriceSelected(total);
-      setData(data.filter((item) => item.orderId !== orderId));
+      setData(data.filter((item) => item.order.id !== order.id));
     }
   };
 
@@ -99,7 +99,7 @@ const CartPage = () => {
                       <InputCheckbox
                         type={"checkbox"}
                         small
-                        onChange={(e) => handleChecked(e, el.id)}
+                        onChange={(e) => handleChecked(e, el)}
                         value={el.price}
                       />
                       <img src={item} alt="item" width={"50vw"} />
