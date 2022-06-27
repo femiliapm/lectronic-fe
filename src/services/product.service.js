@@ -11,3 +11,13 @@ export const getProductByIdAPI = async (productId) => {
     return response;
   }
 };
+
+export const getProductLimitAPI = async () => {
+  const url = `${ROOT_API}/product?landing=true&limit=3`;
+  const response = await fetchAPI({ url, method: "get" });
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response;
+  }
+};

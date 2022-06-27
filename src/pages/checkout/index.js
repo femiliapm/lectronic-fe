@@ -15,7 +15,7 @@ import { CardAddress, MainCheckout } from "../../styles/checkout";
 import item from "../../assets/png/item01.png";
 import { BsTrash } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addTransactionAPI } from "../../services/checkout.service";
+import { addTransactionAPI } from "../../services/transaction.service";
 
 const CheckoutPage = () => {
   const { state } = useLocation();
@@ -67,7 +67,7 @@ const CheckoutPage = () => {
       navigate(".", { state: [] });
       setAddress("");
       setTimeout(() => {
-        navigate("/status");
+        navigate("/status", { state: res.data });
       }, 3000);
     } else {
       alert(res[0]);
