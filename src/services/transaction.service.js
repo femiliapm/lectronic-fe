@@ -25,3 +25,13 @@ export const updateTransactionAPI = async (data) => {
     return response;
   }
 };
+
+export const getTransactionAPI = async () => {
+  const url = `${ROOT_API}/transaction?status=true`;
+  const response = await fetchAPI({ url, method: "get" });
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response;
+  }
+};
