@@ -58,7 +58,7 @@ export const CardItem = styled.div`
   box-shadow: 0px 0px 60px rgba(45, 45, 45, 0.1);
   border-radius: 20px;
   position: relative;
-  padding-top: 27vw;
+  padding-top: 29vw;
   margin: 0 15px 40px;
 
   .layer-img {

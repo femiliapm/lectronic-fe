@@ -19,14 +19,18 @@ import NumberFormat from "react-number-format";
 import Button from "../../components/atomics/Button.comp";
 import { ButtonIconWrapper } from "../../styles/items";
 import seller from "../../assets/png/seller.png";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProductByIdAPI } from "../../services/product.service";
+import { getExistingUserId } from "../../configs/api";
+import { addToCartAPI } from "../../services/order.service";
 
 const DetailItemPage = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState({});
   const [store, setStore] = useState({});
   const [photos, setPhotos] = useState([]);
+  const [quantity, setQuantity] = useState(0);
+  const navigate = useNavigate();
 
   const getProductById = useCallback(async () => {
     const res = await getProductByIdAPI(productId);
@@ -39,6 +43,59 @@ const DetailItemPage = () => {
   useEffect(() => {
     getProductById();
   }, [getProductById]);
+
+  const handleDecrement = (e) => {
+    e.preventDefault();
+    setQuantity(Math.max(quantity - 1, 0));
+  };
+
+  const handleIncrement = (e) => {
+    e.preventDefault();
+    setQuantity(Math.min(quantity + 1, product.stock));
+  };
+
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+    const res = await handleOrder(e);
+    console.log(res);
+    if (res.status === 201) {
+      setTimeout(() => {
+        navigate("/checkout", { state: [{ order: res.data }] });
+      }, 3000);
+    }
+    // const userId = getExistingUserId();
+    // const data = {
+    //   productId: product.id,
+    //   userId,
+    //   quantity,
+    //   price: product.price,
+    //   discount: 0,
+    // };
+    // console.log(data);
+    // const res = await addToCartAPI(data);
+    // console.log(res);
+    // setTimeout(() => {
+    //   navigate("/checkout", { state: res.data });
+    //   alert(res.message);
+    // }, 3000);
+  };
+
+  const handleOrder = async (e) => {
+    e.preventDefault();
+    const userId = getExistingUserId();
+    const data = {
+      productId: product.id,
+      userId,
+      quantity,
+      price: product.price,
+      discount: 0,
+    };
+    console.log(data);
+    const res = await addToCartAPI(data);
+    console.log(res);
+    alert(res.message);
+    return res;
+  };
 
   return (
     <LayoutHome2>
@@ -73,9 +130,19 @@ const DetailItemPage = () => {
             <h3>Details</h3>
             <div className="second-row">
               <InputIncrementWrapper className="border-primary">
-                <button className="primary">-</button>
-                <InputNumber type={"number"} max={4} min={1} value={1} />
-                <button className="primary">+</button>
+                <button className="primary" onClick={handleDecrement}>
+                  -
+                </button>
+                <InputNumber
+                  type={"number"}
+                  max={4}
+                  min={1}
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                />
+                <button className="primary" onClick={handleIncrement}>
+                  +
+                </button>
               </InputIncrementWrapper>
               <div className="stock black-light">
                 Stok <span>{product.stock}</span>
@@ -104,9 +171,9 @@ const DetailItemPage = () => {
             </div>
             <div className="fifth-row">
               <div className="left">
-                <Button text="CheckOut" />
+                <Button text="CheckOut" onClick={handleCheckout} />
               </div>
-              <ButtonIconWrapper small>
+              <ButtonIconWrapper small onClick={handleOrder}>
                 <BsCart2 size={20} className="stroke-primary" />
               </ButtonIconWrapper>
             </div>

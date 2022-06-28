@@ -21,3 +21,13 @@ export const getCartListAPI = async () => {
     return response;
   }
 };
+
+export const deleteCartAPI = async (orderId) => {
+  const url = `${ROOT_API}/order/${orderId}`;
+  const response = await fetchAPI({ url, method: "delete" });
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    return response;
+  }
+};

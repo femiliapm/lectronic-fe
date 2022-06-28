@@ -27,22 +27,26 @@ const CheckoutPage = () => {
   const getTotalPrice = useCallback(() => {
     let sum = 0;
     let disc = 0;
-    for (let index = 0; index < state.length; index++) {
-      const element = state[index];
-      console.log(element);
-      const { price, discount } = element.order;
-      console.log(price);
-      sum += price;
-      disc += discount;
+    if (state && state.length > 0) {
+      for (let index = 0; index < state.length; index++) {
+        const element = state[index];
+        console.log(element);
+        const { price, discount, quantity } = element.order;
+        console.log(price);
+        let temp = price * quantity;
+        sum += temp;
+        disc += discount;
+      }
+      console.log(sum);
+      setTotalPrice(sum);
+      setTotalDiscount(disc);
     }
-    console.log(sum);
-    setTotalPrice(sum);
-    setTotalDiscount(disc);
   }, [state]);
 
   useEffect(() => {
     getTotalPrice();
-  }, [getTotalPrice]);
+    console.log(state);
+  }, [getTotalPrice, state]);
 
   const handleTransaction = async (e) => {
     e.preventDefault();
@@ -94,6 +98,7 @@ const CheckoutPage = () => {
             </CardAddress>
             {state && state.length > 0 ? (
               state.map((el) => {
+                console.log(el);
                 const { product, price, quantity, id } = el.order;
                 return (
                   <CardCartItem key={id}>

@@ -21,7 +21,7 @@ import {
 } from "../../styles/items";
 import item from "../../assets/png/item01.png";
 import { Link, useNavigate } from "react-router-dom";
-import { getCartListAPI } from "../../services/order.service";
+import { deleteCartAPI, getCartListAPI } from "../../services/order.service";
 
 const CartPage = () => {
   const [dataCart, setDataCart] = useState([]);
@@ -45,13 +45,13 @@ const CartPage = () => {
     console.log(checked);
     if (checked) {
       let temp = Number(priceSelected);
-      let value = Number(e.target.value);
+      let value = Number(e.target.value * order.quantity);
       let total = Number(temp + value);
       setPriceSelected(total);
       setData([...data, { order }]);
     } else {
       let temp = Number(priceSelected);
-      let value = Number(e.target.value);
+      let value = Number(e.target.value * order.quantity);
       let total = Number(temp - value);
       setPriceSelected(total);
       setData(data.filter((item) => item.order.id !== order.id));
@@ -63,6 +63,16 @@ const CartPage = () => {
     console.log(data, "data");
     e.preventDefault();
     navigate("/checkout", { state: data });
+  };
+
+  const deleteCart = async (e, id) => {
+    e.preventDefault();
+    const res = await deleteCartAPI(id);
+    console.log(res);
+    if (res.status === 200) {
+      alert("Order deleted!");
+      getCartList();
+    }
   };
 
   return (
@@ -122,7 +132,9 @@ const CartPage = () => {
                     </div>
                     <div className="item-action">
                       <div className="center">
-                        <BsTrash />
+                        <button onClick={(e) => deleteCart(e, el.id)}>
+                          <BsTrash />
+                        </button>
                         <InputIncrementWrapper className="border-primary">
                           <button className="primary">-</button>
                           <InputNumber

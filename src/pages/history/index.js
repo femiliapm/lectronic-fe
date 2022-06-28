@@ -52,8 +52,12 @@ const HistoryPage = () => {
 
   useEffect(() => {
     getHistory();
-    setObject();
+    return setObject;
   }, [setObject]);
+
+  // useEffect(() => {
+  //   setObject();
+  // }, [setObject]);
 
   return (
     <LayoutHome>
@@ -102,7 +106,7 @@ const HistoryPage = () => {
                           <p className="black-light">
                             Total{" "}
                             <NumberFormat
-                              value={trans.order.price}
+                              value={trans.totalPrice}
                               displayType={"text"}
                               prefix={"Rp "}
                               thousandSeparator="."
