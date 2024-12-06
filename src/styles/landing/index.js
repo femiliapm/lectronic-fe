@@ -435,7 +435,7 @@ export const CardItem = styled.div`
   .layer-img {
     position: absolute;
     top: 0;
-    margin: 9vw 0 0;
+    margin: 10.5vw 0 0;
     left: 0;
     display: flex;
     justify-content: center;
